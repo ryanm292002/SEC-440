@@ -1,28 +1,4 @@
-vyos@fw-ryan01:~$ show configuration
-high-availability {
-    vrrp {
-        group LAN {
-            address 10.0.5.1/24 {
-            }
-            interface eth1
-            vrid 10
-        }
-        group WAN {
-            address 10.0.17.115/24 {
-            }
-            interface eth0
-            vrid 20
-        }
-    }
-}
-interfaces {
-    ethernet eth0 {
-        address 10.0.17.25/24
-        description SEC350-WAN
-        hw-id 00:50:56:a1:7d:33
-    }
-    ethernet eth1 {
-:...skipping...
+
 high-availability {
     vrrp {
         group LAN {
