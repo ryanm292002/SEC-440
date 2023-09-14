@@ -19,11 +19,11 @@ interfaces {
     ethernet eth0 {
         address 10.0.17.25/24
         description SEC350-WAN
-        hw-id 00:50:56:a1:7d:33
+        hw-id MAC
     }
     ethernet eth1 {
         address 10.0.5.2/24
-        hw-id 00:50:56:a1:fe:94
+        hw-id MAC
     }
     loopback lo {
     }
