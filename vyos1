@@ -7,11 +7,11 @@ high-availability {
             interface eth1
             vrid 10
         }
-        group WAN {
+        group wangroup15 {
             address 10.0.17.115/24 {
             }
             interface eth0
-            vrid 20
+            vrid 165
         }
     }
 }
