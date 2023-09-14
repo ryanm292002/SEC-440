@@ -6,9 +6,9 @@ set high-availability vrrp group WAN address 10.0.17.115/24
 set high-availability vrrp group WAN interface 'eth0'
 set high-availability vrrp group WAN vrid '20'
 set interfaces ethernet eth0 address '10.0.17.85/24'
-set interfaces ethernet eth0 hw-id '00:50:56:a1:8f:4a'
+set interfaces ethernet eth0 hw-id 'MAC'
 set interfaces ethernet eth1 address '10.0.5.3/24'
-set interfaces ethernet eth1 hw-id '00:50:56:a1:f2:48'
+set interfaces ethernet eth1 hw-id 'MAC'
 set interfaces loopback lo
 set nat destination rule 10 description 'port forward for web01 v2'
 set nat destination rule 10 destination port '80'
@@ -40,7 +40,7 @@ set system conntrack modules sqlnet
 set system conntrack modules tftp
 set system console device ttyS0 speed '115200'
 set system host-name 'vyos'
-set system login user vyos authentication encrypted-password '$s.9Pi.rw4PVhL2S7$ZJlTFYwMj4EY7b8wTIa8xRav7eBuB8zMPJfYUmrf4FpFLsLLN8I1tNpy7m7lRocZVChQOO6V2MsrxYDW4UiTi/'
+set system login user vyos authentication encrypted-password 'psswd'
 set system login user vyos authentication plaintext-password ''
 set system name-server '10.0.17.2'
 set system ntp server time1.vyos.net
