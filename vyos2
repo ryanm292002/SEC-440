@@ -18,11 +18,11 @@ high-availability {
 interfaces {
     ethernet eth0 {
         address 10.0.17.85/24
-        hw-id 00:50:56:a1:8f:4a
+        hw-id MAC
     }
     ethernet eth1 {
         address 10.0.5.3/24
-        hw-id 00:50:56:a1:f2:48
+        hw-id MAC
     }
     loopback lo {
     }
