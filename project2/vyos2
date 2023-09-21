@@ -1,1 +1,158 @@
+vyos@vyos:~$ show configuration
+high-availability {
+    vrrp {
+        group LAN {
+            address 10.0.5.1/24 {
+            }
+            interface eth1
+            vrid 10
+        }
+        group OPT {
+            address 10.0.6.1/24 {
+            }
+            interface eth2
+            vrid 20
+        }
+        group wangroup15 {
+            address 10.0.17.115/24 {
+            }
+            interface eth0
+            vrid 165
+        }
+    }
+}
+interfaces {
+    ethernet eth0 {
+        address 10.0.17.85/24
+        hw-id 00:50:56:a1:8f:4a
+    }
+    ethernet eth1 {
+        address 10.0.5.3/24
+        hw-id 00:50:56:a1:f2:48
+    }
+    ethernet eth2 {
+        address 10.0.6.3/24
+        hw-id 00:50:56:a1:93:2e
+    }
+    loopback lo {
+    }
+}
+nat {
+    destination {
+        rule 10 {
+            description "port forward for web01 v2"
+            destination {
+                port 80
+            }
+            inbound-interface eth0
+            protocol tcp
+            translation {
+                address 10.0.6.10
+            }
+        }
+        rule 20 {
+            description "SSH into web01 v2"
+            destination {
+                port 22
+            }
+            inbound-interface eth0
+            protocol tcp
+            translation {
+                address 10.0.5.100
+                port 22
+            }
+        }
+    }
+    source {
+        rule 10 {
+            outbound-interface eth0
+            source {
+                address 10.0.5.0/24
+            }
+            translation {
+                address masquerade
+            }
+        }
+        rule 20 {
+            outbound-interface eth0
+            source {
+                address 10.0.6.0/24
+            }
+            translation {
+                address masquerade
+            }
+        }
+    }
+}
+protocols {
+    static {
+        route 0.0.0.0/0 {
+            next-hop 10.0.17.2 {
+            }
+        }
+    }
+}
+service {
+    dns {
+        forwarding {
+            allow-from 10.0.5.0/24
+            allow-from 10.0.6.0/24
+            listen-address 10.0.5.1
+            listen-address 10.0.6.1
+            system
+        }
+    }
+    ssh {
+        listen-address 0.0.0.0
+    }
+}
+system {
+    config-management {
+        commit-revisions 100
+    }
+    conntrack {
+        modules {
+            ftp
+            h323
+            nfs
+            pptp
+            sip
+            sqlnet
+            tftp
+        }
+    }
+    console {
+        device ttyS0 {
+            speed 115200
+        }
+    }
+    host-name vyos
+    login {
+        user vyos {
+            authentication {
+                encrypted-password ****************
+                plaintext-password ****************
+            }
+        }
+    }
+    name-server 10.0.17.2
+    ntp {
+        server time1.vyos.net {
+        }
+        server time2.vyos.net {
+        }
+        server time3.vyos.net {
+        }
+    }
+    syslog {
+        global {
+            facility all {
+                level info
+            }
+            facility protocols {
+                level debug
+            }
+        }
+    }
+}
 
