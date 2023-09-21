@@ -1,0 +1,19 @@
+vrrp_script haproxy {
+	script "killall -0 haproxy"
+	interval 2
+	weight 2
+}
+vrrp_instance VIP1 {
+	virtual_router_id 165
+	interface ens160
+	priority 200
+	state MASTER
+	
+	virtual_ipaddress {
+		10.0.6.10/24
+	}
+
+	track_script {
+		haproxy
+	}
+}
